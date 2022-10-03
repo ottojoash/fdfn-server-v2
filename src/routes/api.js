@@ -3,12 +3,14 @@ const AdminController = require('../controllers/AdminController');
 const PayBillController = require('../controllers/PayBillController');
 const PackagesController = require('../controllers/PackagesController');
 const ProductController = require('../controllers/ProductController');
+const ProductBillController = require('../controllers/ProductBillController');
 const MemberController = require('../controllers/MemberController');
 const FtpSiteController = require('../controllers/FtpSiteController');
 const LiveTvController = require('../controllers/LiveTvController');
-const MovieController = require('../controllers/MovieController');
+// const MovieController = require('../controllers/MovieController');
 const CoverageController = require('../controllers/CoverageController');
 const RegController = require('../controllers/RegController');
+const NotificationController = require('../controllers/NotificationController');
 const uploadPic = require('../middleware/UploadMiddleware');
 const uploadRegPic = require('../middleware/RegUploadMiddleware');
 
@@ -114,5 +116,16 @@ router.post(
 router.get('/readRegPackage', RegController.readRegPackage);
 router.post('/updateRegPackage', RegController.updateRegPackage);
 router.post('/deleteRegPackage', RegController.deleteRegPackage);
+
+// Product Bill routes
+router.post('/createProductBill', ProductBillController.createProductBill);
+router.get('/readProductBill', ProductBillController.readProductBills);
+router.post('/updateProductBill', ProductBillController.updateProductBill);
+router.post('/deleteProductBill', ProductBillController.deleteProductBill);
+
+// Notification routes
+router.post('/createNotification', NotificationController.createNotification);
+router.get('/readNotification', NotificationController.readNotifications);
+router.post('/deleteNotification', NotificationController.deleteNotification);
 
 module.exports = router;

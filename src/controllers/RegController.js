@@ -7,8 +7,6 @@ exports.createRegPackage = (req, res) => {
     const nidBack = url + '/registration/' + req.files.nidBack[0].filename;
     const regBody = req.body;
     const status = 'New';
-    const createRegDate = Date.now();
-    const updateRegDate = Date.now();
 
     const RegData = {
         ...regBody,
@@ -16,8 +14,6 @@ exports.createRegPackage = (req, res) => {
         nidFront,
         nidBack,
         status,
-        createRegDate,
-        updateRegDate,
     };
     // res.status(200).json({ status: 'success', data: RegData });
     RegModel.create(RegData, (err, data) => {
@@ -30,37 +26,43 @@ exports.createRegPackage = (req, res) => {
 };
 
 exports.readRegPackage = (req, res) => {
-    RegModel.find({}, (err, data) => {
-        if (err) {
-            res.status(400).json({ status: 'fail', data: err });
-        } else {
-            res.status(200).json({ status: 'success', data: data });
-        }
-    });
+    // sort by date
+    RegModel.find({})
+        .sort({ createRegDate: -1 })
+        .exec((err, data) => {
+            if (err) {
+                res.status(400).json({ status: 'fail', data: err });
+            } else {
+                res.status(200).json({ status: 'success', data: data });
+            }
+        });
+
+    // RegModel.find({}, (err, data) => {
+    //     if (err) {
+    //         res.status(400).json({ status: 'fail', data: err });
+    //     } else {
+    //         res.status(200).json({ status: 'success', data: data });
+    //     }
+    // });
 };
 
 exports.updateRegPackage = (req, res) => {
-    let id = req.body['_id'];
+    let id = req.body['id'];
     let status = req.body['status'];
-    let updateRegDate = Date.now();
+    let updateRegDate = req.body['updateRegDate'];
 
     const updateRegData = {
         status,
         updateRegDate,
     };
 
-    RegModel.updateOne(
-        { _id: id },
-        { $set: updateRegData },
-        { upsert: true },
-        (err, data) => {
-            if (err) {
-                res.status(400).json({ status: 'fail', data: err });
-            } else {
-                res.status(200).json({ status: 'success', data: data });
-            }
+    RegModel.updateOne({ _id: id }, { $set: updateRegData }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
         }
-    );
+    });
 };
 
 exports.deleteRegPackage = (req, res) => {
