@@ -3,7 +3,7 @@ const RegSchema = mongoose.Schema(
     {
         subscriberName: { type: String, required: true },
         authorizedName: { type: String, default: '' },
-        email: { type: String, required: true },
+        email: { type: String, required: true, unique: true },
         contactNumber: { type: String, required: true },
         nationalId: { type: String, default: '' },
         yourPhoto: { type: String, default: '' },

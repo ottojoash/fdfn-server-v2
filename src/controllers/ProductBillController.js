@@ -51,3 +51,15 @@ exports.deleteProductBill = (req, res) => {
         }
     });
 };
+
+exports.readProductBillByEmail = (req, res) => {
+    let email = req.query['email'];
+
+    ProductBillModel.find({ email: email }, (err, data) => {
+        if (err) {
+            res.status(400).json({ status: 'fail', data: err });
+        } else {
+            res.status(200).json({ status: 'success', data: data });
+        }
+    });
+};

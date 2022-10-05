@@ -1,4 +1,6 @@
 const express = require('express');
+const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
+const ProfileController = require('../controllers/ProfileController');
 const AdminController = require('../controllers/AdminController');
 const PayBillController = require('../controllers/PayBillController');
 const PackagesController = require('../controllers/PackagesController');
@@ -16,12 +18,18 @@ const uploadRegPic = require('../middleware/RegUploadMiddleware');
 
 const router = express.Router();
 
+// Profile
+// router.post('/profile', ProfileController.UserLogin, (err, req, res, next) => {
+//     res.status(400).send({ err: err.message });
+// });
+// router.get('/profile', AuthVerifyMiddleware, ProfileController.SelectProfile);
+
 // Admin Routes
 router.post('/createAdmin', AdminController.createAdmin);
 router.get('/readAdmins', AdminController.readAdmins);
 router.post('/deleteAdmin', AdminController.deleteAdmin);
-router.get('/isAdmin', AdminController.isAdmin);
-router.get('/isModerator', AdminController.isModerator);
+// router.get('/isAdmin', AdminController.isAdmin);
+// router.get('/isModerator', AdminController.isModerator);
 
 // Packages routes
 router.post('/createPackage', PackagesController.createPackage);
@@ -116,12 +124,17 @@ router.post(
 router.get('/readRegPackage', RegController.readRegPackage);
 router.post('/updateRegPackage', RegController.updateRegPackage);
 router.post('/deleteRegPackage', RegController.deleteRegPackage);
+router.get('/readRegPackageByEmail', RegController.readRegPackageByEmail);
 
 // Product Bill routes
 router.post('/createProductBill', ProductBillController.createProductBill);
 router.get('/readProductBill', ProductBillController.readProductBills);
 router.post('/updateProductBill', ProductBillController.updateProductBill);
 router.post('/deleteProductBill', ProductBillController.deleteProductBill);
+router.get(
+    '/readProductBillByEmail',
+    ProductBillController.readProductBillByEmail
+);
 
 // Notification routes
 router.post('/createNotification', NotificationController.createNotification);

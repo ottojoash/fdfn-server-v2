@@ -2,7 +2,6 @@ const AdminModel = require('../models/AdminModel');
 
 exports.createAdmin = (req, res) => {
     let reqBody = req.body;
-    // console.log(reqBody);
 
     AdminModel.create(reqBody, (err, data) => {
         if (err) {

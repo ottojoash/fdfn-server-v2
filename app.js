@@ -35,7 +35,7 @@ app.use(xss());
 app.use(limiter);
 
 //Mongodb Connect by mongoose
-const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cziiz.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER_NAME}.${process.env.DB_HOSTNAME}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 mongoose.connect(URI, (err) => {
     if (err) {
         console.log(err);
