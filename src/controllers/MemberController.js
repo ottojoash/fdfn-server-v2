@@ -4,7 +4,8 @@ exports.createMember = (req, res) => {
     let reqBody = req.body;
 
     const url = req.get('host');
-    const image = url + '/images/' + req.file.filename;
+    const protocol = req.protocol;
+    const image = protocol + url + '/images/' + req.file.filename;
     const memberData = { ...reqBody, image };
 
     MemberModel.create(memberData, (err, data) => {

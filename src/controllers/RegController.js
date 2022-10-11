@@ -2,9 +2,13 @@ const RegModel = require('../models/RegModel');
 
 exports.createRegPackage = (req, res) => {
     const url = req.get('host');
-    const yourPhoto = url + '/registration/' + req.files.yourPhoto[0].filename;
-    const nidFront = url + '/registration/' + req.files.nidFront[0].filename;
-    const nidBack = url + '/registration/' + req.files.nidBack[0].filename;
+    const protocol = req.protocol;
+    const yourPhoto =
+        protocol + url + '/registration/' + req.files.yourPhoto[0].filename;
+    const nidFront =
+        protocol + url + '/registration/' + req.files.nidFront[0].filename;
+    const nidBack =
+        protocol + url + '/registration/' + req.files.nidBack[0].filename;
     const regBody = req.body;
     const status = 'New';
 

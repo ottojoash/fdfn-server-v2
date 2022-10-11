@@ -2,7 +2,8 @@ const MovieModel = require('../models/MovieModel');
 
 exports.createMovie = (req, res) => {
     const url = req.get('host');
-    const image = url + '/images/' + req.file.filename;
+    const protocol = req.protocol;
+    const image = protocol + url + '/images/' + req.file.filename;
     const channelData = req.body;
     const channel = { ...channelData, image };
     MovieModel.create(channel, (err, data) => {

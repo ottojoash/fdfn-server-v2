@@ -4,7 +4,8 @@ exports.createProduct = (req, res) => {
     let reqBody = req.body;
 
     const url = req.get('host');
-    const image = url + '/images/' + req.file.filename;
+    const protocol = req.protocol;
+    const image = protocol + url + '/images/' + req.file.filename;
     const productData = { ...reqBody, image };
 
     ProductModel.create(productData, (err, data) => {

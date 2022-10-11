@@ -2,7 +2,8 @@ const ChannelModel = require('../models/LiveTvModel');
 
 exports.createChannel = (req, res) => {
     const url = req.get('host');
-    const image = url + '/images/' + req.file.filename;
+    const protocol = req.protocol;
+    const image = protocol + url + '/images/' + req.file.filename;
     const channelData = req.body;
     const channel = { ...channelData, image };
     ChannelModel.create(channel, (err, data) => {

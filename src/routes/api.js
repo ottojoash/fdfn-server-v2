@@ -28,8 +28,8 @@ const router = express.Router();
 router.post('/createAdmin', AdminController.createAdmin);
 router.get('/readAdmins', AdminController.readAdmins);
 router.post('/deleteAdmin', AdminController.deleteAdmin);
-// router.get('/isAdmin', AdminController.isAdmin);
-// router.get('/isModerator', AdminController.isModerator);
+router.get('/isAdmin', AdminController.isAdmin);
+router.get('/isModerator', AdminController.isModerator);
 
 // Packages routes
 router.post('/createPackage', PackagesController.createPackage);
