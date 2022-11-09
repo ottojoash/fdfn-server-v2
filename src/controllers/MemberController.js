@@ -3,12 +3,7 @@ const MemberModel = require('../models/MemberModel');
 exports.createMember = (req, res) => {
     let reqBody = req.body;
 
-    const url = req.get('host');
-    const protocol = req.protocol;
-    const image = protocol + url + '/images/' + req.file.filename;
-    const memberData = { ...reqBody, image };
-
-    MemberModel.create(memberData, (err, data) => {
+    MemberModel.create(reqBody, (err, data) => {
         if (err) {
             res.status(400).json({ status: 'fail', data: err });
         } else {

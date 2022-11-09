@@ -22,7 +22,7 @@ const RegSchema = mongoose.Schema(
         packageName: { type: String, required: true },
         totalMb: { type: String, required: true },
         price: { type: String, required: true },
-        status: { type: String, required: true },
+        status: { type: String, default: 'pending' },
         createRegDate: { type: String },
         updateRegDate: { type: String },
     },
